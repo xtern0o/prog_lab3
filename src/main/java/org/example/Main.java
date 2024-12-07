@@ -23,6 +23,8 @@ public class Main {
         baronApelsin.setRole(WorkerRole.BARON);
         ragmanFasol.setRole(WorkerRole.RAGMAN);
 
+        System.out.println("\nНачало истории\n");
+
         Action mandarinsFakeStory = new Action() {
             @Override
             public void run() {
@@ -118,7 +120,7 @@ public class Main {
 
                 dukeAndBaronInTheCellar.run();
 
-                System.out.println("Итог:");
+                System.out.println("\nИтог:");
                 if (dukeMandarin.getItems().contains(treasure)) {
                     System.out.println("Герцогу Мандарину удалось украсть сокровище!!!!!!");
                 }

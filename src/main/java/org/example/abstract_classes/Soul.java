@@ -11,7 +11,7 @@ public abstract class Soul extends NamedObject {
 
     public Soul(String name, Location location, SoulState state) {
         this.setName(name);
-        this.setLocation(location);
+        this.setLocation(location, false);
         this.setState(state);
     }
     public Soul(String name, Location location) {
@@ -57,6 +57,30 @@ public abstract class Soul extends NamedObject {
             }
             else {
                 System.out.printf("%s перемещается на локацию \"%s\"\n", this.name, newLocation.name);
+            }
+        }
+    }
+
+    public void setLocation(Location newLocation, boolean log) {
+        if (newLocation == null) {
+            if (location != null) {
+                if (log) System.out.printf("%s покидает локацию %s\n", this, this.location);
+                this.location.removeSoul(this);
+                this.location = null;
+            }
+        }
+        else {
+            if (location != null) {
+                this.location.removeSoul(this);
+            }
+            this.location = newLocation;
+            newLocation.addSoul(this);
+
+            if (newLocation instanceof Room) {
+                if (log) System.out.printf("%s перемещается в комнату: \"%s\"\n", this.name, newLocation.name);
+            }
+            else {
+                if (log) System.out.printf("%s перемещается на локацию \"%s\"\n", this.name, newLocation.name);
             }
         }
     }

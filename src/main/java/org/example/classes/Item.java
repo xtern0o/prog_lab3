@@ -9,7 +9,7 @@ public class Item extends NamedObject {
 
     public Item(String name, Location location, ItemState state) {
         this.setName(name);
-        if (location != null) this.setLocation(location);
+        if (location != null) this.setLocation(location, false);
         this.setState(state);
     }
     public Item(String name) {
@@ -50,6 +50,30 @@ public class Item extends NamedObject {
             }
             else {
                 System.out.printf("%s перемещается на локацию \"%s\"\n", this.name, newLocation.getName());
+            }
+        }
+    }
+
+    public void setLocation(Location newLocation, boolean log) {
+        if (newLocation == null) {
+            if (log) System.out.printf("%s удален из %s\n", this, this.location);
+            if (this.location != null) {
+                this.location.removeItem(this);
+            }
+            this.location = null;
+        }
+        else {
+            if (location != null) {
+                this.location.removeItem(this);
+            }
+            this.location = newLocation;
+            newLocation.addItem(this);
+
+            if (newLocation instanceof Room) {
+                if (log) System.out.printf("%s перемещается в комнату: \"%s\"\n", this.name, newLocation.getName());
+            }
+            else {
+                if (log) System.out.printf("%s перемещается на локацию \"%s\"\n", this.name, newLocation.getName());
             }
         }
     }
