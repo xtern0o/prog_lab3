@@ -3,6 +3,7 @@ package org.example;
 import org.example.abstract_classes.Soul;
 import org.example.classes.*;
 import org.example.enums.*;
+import org.example.exceptions.*;
 import org.example.interfaces.Action;
 import org.example.records.Speach;
 
@@ -74,30 +75,33 @@ public class Main {
                     System.out.println(s);
                 }
 
-                if (someone.getLocation() != null) {
-
+                try {
                     if (someone.lookAt(dukeMandarin)) {
+                        System.out.printf("%s сваливает вину на %s\n", dukeMandarin, baronApelsin);
                         dukeMandarin.explain(mandarinsFakeStory);
                     }
-                    baronApelsin.takeItem(wineBottle);
-                    baronApelsin.drink(wineBottle);
-
-                    if (!someone.lookAt(dukeMandarin) && !baronApelsin.lookAt(dukeMandarin)) {
-                        Speach successSpeach = new Speach(dukeMandarin, "никто не смотрит! Можно попытаться украсть сокровище");
-                        dukeMandarin.say(successSpeach);
-                        dukeMandarin.takeItem(treasure);
-                    }
                 }
-                else {
-                    System.out.println();
-                    baronApelsin.takeItem(wineBottle);
-                    baronApelsin.drink(wineBottle);
+                catch (NoObjectInThisLocationException err) {
+                    System.out.println("Никто не застает в расплох %s и %s");
+                }
 
-                    if (!baronApelsin.lookAt(dukeMandarin)) {
-                        Speach successSpeach = new Speach(dukeMandarin, "Барон Апельсин не смотрит! Можно попытаться украсть сокровище");
-                        dukeMandarin.say(successSpeach);
-                        dukeMandarin.takeItem(treasure);
-                    }
+                baronApelsin.takeItem(wineBottle);
+                baronApelsin.drink(wineBottle);
+
+                boolean isSomeoneLooks;
+                try {
+                    isSomeoneLooks = someone.lookAt(dukeMandarin);
+                }
+                catch (NoObjectInThisLocationException err) {
+                    isSomeoneLooks = false;
+                }
+
+                boolean isBaronLooks = baronApelsin.lookAt(dukeMandarin);
+
+                if (!isSomeoneLooks && !isBaronLooks) {
+                    Speach successSpeach = new Speach(dukeMandarin, "никто не смотрит! Можно попытаться украсть сокровище");
+                    dukeMandarin.say(successSpeach);
+                    dukeMandarin.takeItem(treasure);
                 }
 
                 baronApelsin.setLocation(null);
