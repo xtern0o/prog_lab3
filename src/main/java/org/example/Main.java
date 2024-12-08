@@ -13,7 +13,7 @@ public class Main {
 
         Worker baronApelsin = new Worker("Апельсин", 4);
         Worker ragmanFasol = new Worker("Фасоль", 4);
-        Worker dukeMandarin = new Worker("Мандарин", SoulState.NORMAL, null, 4, WorkerRole.DUKE, false, WorkStage.DO_NOTHING);
+        Worker dukeMandarin = new Worker("Мандарин", 4);
         Person someone = new Person("Кто-то", 4);
         Person you = new Person("Вы (читатель)", 0);
 
@@ -22,6 +22,7 @@ public class Main {
 
         baronApelsin.setRole(WorkerRole.BARON);
         ragmanFasol.setRole(WorkerRole.RAGMAN);
+        dukeMandarin.setRole(WorkerRole.DUKE);
 
         System.out.println("\nНачало истории\n");
 

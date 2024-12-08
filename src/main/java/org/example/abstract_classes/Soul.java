@@ -11,7 +11,7 @@ public abstract class Soul extends NamedObject {
 
     public Soul(String name, Location location, SoulState state) {
         this.setName(name);
-        this.setLocation(location, false);
+        this.setLocation(location);
         this.setState(state);
     }
     public Soul(String name, Location location) {

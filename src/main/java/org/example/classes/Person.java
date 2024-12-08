@@ -71,7 +71,7 @@ public class Person extends Soul implements Speakable {
         items.clear();
     }
 
-    public void addAllItems(ArrayList<Item> newItems) throws NoSpaceException , NoObjectInThisLocationException{
+    public void addAllItems(ArrayList<Item> newItems) throws NoSpaceException, NoObjectInThisLocationException{
         if (this.items.size() + newItems.size() > itemsLimit) {
             throw new NoSpaceException(String.format("Недостаточно места для добавление вещей в инвентарь персонажа %s", this.name));
         }
