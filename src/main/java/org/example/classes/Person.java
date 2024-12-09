@@ -3,7 +3,8 @@ package org.example.classes;
 import org.example.abstract_classes.Soul;
 import org.example.enums.ItemState;
 import org.example.enums.SoulState;
-import org.example.exceptions.NoObjectInThisLocationException;
+import org.example.exceptions.IllegalLookingException;
+import org.example.exceptions.IllegalTakeItemException;
 import org.example.exceptions.NoSpaceException;
 import org.example.interfaces.Action;
 import org.example.interfaces.Speakable;
@@ -35,17 +36,17 @@ public class Person extends Soul implements Speakable {
         return items;
     }
 
-    public boolean takeItem(Item i) throws NoSpaceException, NoObjectInThisLocationException {
+    public boolean takeItem(Item i) throws NoSpaceException, IllegalTakeItemException {
         if (this.items.size() + 1 > itemsLimit) {
-            throw new NoSpaceException(String.format("Недостаточно места для добавление вещи в инвентарь персонажа %s", this.name));
+            throw new NoSpaceException(this, i);
         }
         if (location != null) {
             if (!i.getLocation().equals(this.location)) {
-                throw new NoObjectInThisLocationException(String.format("Локация %s не содержит предмета %s", this.location.getName(), i.getName()));
+                throw new IllegalTakeItemException(this, i);
             }
         }
         else if (i.getLocation() != null) {
-            throw new NoObjectInThisLocationException("Невозможно добавить предмет в инвентарь: персонаж не находится на локации");
+            throw new IllegalTakeItemException(this, i);
         }
 
         if (i.getState().equals(ItemState.HIDDEN)) {
@@ -71,9 +72,9 @@ public class Person extends Soul implements Speakable {
         items.clear();
     }
 
-    public void addAllItems(ArrayList<Item> newItems) throws NoSpaceException, NoObjectInThisLocationException{
+    public void addAllItems(ArrayList<Item> newItems) throws NoSpaceException, IllegalTakeItemException {
         if (this.items.size() + newItems.size() > itemsLimit) {
-            throw new NoSpaceException(String.format("Недостаточно места для добавление вещей в инвентарь персонажа %s", this.name));
+            throw new NoSpaceException(this, newItems.get(itemsLimit - 1));
         }
         for (Item i : newItems) {
             takeItem(i);
@@ -111,7 +112,7 @@ public class Person extends Soul implements Speakable {
 
     public boolean lookAt(Person p) {
         if (!p.location.equals(this.location)) {
-            throw new NoObjectInThisLocationException("Невозможно помотреть на персонажа: его нет на этой локации");
+            throw new IllegalLookingException(this, p);
         }
         if (Math.random() < 0.5) {
             System.out.println(this + " заметил " + p);

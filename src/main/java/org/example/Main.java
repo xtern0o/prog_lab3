@@ -81,7 +81,7 @@ public class Main {
                         dukeMandarin.explain(mandarinsFakeStory);
                     }
                 }
-                catch (NoObjectInThisLocationException err) {
+                catch (IllegalLookingException err) {
                     System.out.printf("Никто не застает в расплох персонажей %s и %s\n", dukeMandarin, baronApelsin);
                 }
 
@@ -92,7 +92,7 @@ public class Main {
                 try {
                     isSomeoneLooks = someone.lookAt(dukeMandarin);
                 }
-                catch (NoObjectInThisLocationException err) {
+                catch (IllegalLookingException err) {
                     isSomeoneLooks = false;
                 }
 
@@ -136,5 +136,34 @@ public class Main {
         };
 
         mainAction.run();
+
+//        Action example = new Action() {
+//            @Override
+//            public void run() {
+//                Person p = new Person("popo", 3);
+//                Person g = new Person("gogo", 3);
+//                Item i = new Item("loc1_s");
+//                Item i2 = new Item("loc2_s");
+//                Location loc1 = new Location("Loc1");
+//                Location loc2 = new Location("Loc2");
+//                p.setLocation(loc1);
+//                g.setLocation(loc2);
+//
+//                try {
+//                    p.lookAt(g);
+//                }
+//                catch (IllegalLookingException err) {
+//                    err.initCause(new StackOverflowError());
+//                    System.out.println(err.getCause());
+//                }
+//
+//                Test.A aa = new Test.A();
+//                Test test = new Test();
+//                Test.B b = test.new B();
+//
+//            }
+//        };
+//
+//        example.run();
     }
 }

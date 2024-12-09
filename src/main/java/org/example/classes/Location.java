@@ -2,7 +2,8 @@ package org.example.classes;
 
 import org.example.abstract_classes.NamedObject;
 import org.example.abstract_classes.Soul;
-import org.example.exceptions.NoObjectInThisLocationException;
+import org.example.exceptions.IllegalTakeItemException;
+import org.example.exceptions.NoSuchObjectInLocationException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,7 +45,7 @@ public class Location extends NamedObject {
             return true;
         }
         else {
-            throw new NoObjectInThisLocationException("Такого предмета нет на этой локации");
+            throw new NoSuchObjectInLocationException(i, this);
         }
     }
     public boolean removeSoul(Soul s) {
@@ -53,7 +54,7 @@ public class Location extends NamedObject {
             return true;
         }
         else {
-            throw new NoObjectInThisLocationException("Такой души нет на этой локации");
+            throw new NoSuchObjectInLocationException(s, this);
         }
     }
 

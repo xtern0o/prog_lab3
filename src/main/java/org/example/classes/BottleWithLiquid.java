@@ -32,4 +32,5 @@ public class BottleWithLiquid extends Item {
     public void setFull(boolean full) {
         this.full = full;
     }
+
 }

@@ -1,6 +1,6 @@
 package org.example.abstract_classes;
 
-public abstract class NamedObject {
+public class NamedObject {
     protected String name;
 
     public String getName() {
@@ -10,7 +10,7 @@ public abstract class NamedObject {
         this.name = name;
     }
 
-    abstract public String toString();
-    abstract public int hashCode();
-    abstract public boolean equals(Object obj);
+//    abstract public String toString();
+//    abstract public int hashCode();
+//    abstract public boolean equals(Object obj);
 }

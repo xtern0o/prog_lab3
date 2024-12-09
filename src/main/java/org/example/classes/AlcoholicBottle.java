@@ -29,4 +29,9 @@ public class AlcoholicBottle extends BottleWithLiquid {
     public void setAlcoPercent(byte alcoPercent) {
         this.alcoPercent = alcoPercent;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Алкогольный напиток %s. Крепость: %d/127 (%s)", this.name, this.alcoPercent, (this.isFull() ? "полный" : "пустой"));
+    }
 }

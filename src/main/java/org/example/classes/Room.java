@@ -39,14 +39,14 @@ public class Room extends Location {
     @Override
     public void addItem(Item i) throws NoSpaceException{
         if (this.items.size() + 1 > itemsLimit && !items.contains(i)) {
-            throw new NoSpaceException("Недостаточно места для добавления предмета");
+            throw new NoSpaceException(this, i);
         }
         super.addItem(i);
     }
     @Override
     public void addSoul(Soul s) throws NoSpaceException {
         if (this.souls.size() + 1 > soulsLimit && !souls.contains(s)) {
-            throw new NoSpaceException("Недостаточно места для добавления души");
+            throw new NoSpaceException(this, s);
         }
         super.addSoul(s);
     }
