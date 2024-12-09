@@ -9,13 +9,13 @@ import org.example.records.Speach;
 
 public class Main {
     public static void main(String[] args) {
-        Location startLocation = new Location("Стартовая локация");
         Room cellar = new Room("Погреб", 10, 3);
 
         Worker baronApelsin = new Worker("Апельсин", 4);
         Worker ragmanFasol = new Worker("Фасоль", 4);
         Worker dukeMandarin = new Worker("Мандарин", 4);
         Person someone = new Person("Кто-то", 4);
+
         Person you = new Person("Вы (читатель)", 0);
 
         Item treasure = new Item("Сокровище", cellar, ItemState.HIDDEN);
@@ -82,7 +82,7 @@ public class Main {
                     }
                 }
                 catch (NoObjectInThisLocationException err) {
-                    System.out.println("Никто не застает в расплох %s и %s");
+                    System.out.printf("Никто не застает в расплох персонажей %s и %s\n", dukeMandarin, baronApelsin);
                 }
 
                 baronApelsin.takeItem(wineBottle);
